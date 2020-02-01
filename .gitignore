@@ -17,3 +17,6 @@ src/styles/*
 src/components/*
 *.css
 package-lock.json
+
+# ENV
+.env

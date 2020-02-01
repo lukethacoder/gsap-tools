@@ -1,54 +1,52 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+require("dotenv").config();
+const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+console.log("process.env => ", process.env.NODE_ENV);
 
 module.exports = {
   mode: process.env.NODE_ENV,
 
-  entry: './src/index.js',
+  entry: "./src/index.js",
 
   output: {
-    libraryTarget: 'commonjs2',
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'gsap-tools.js',
+    libraryTarget: "commonjs2",
+    path: path.resolve(__dirname, "dist"),
+    filename: "gsap-tools.js"
   },
 
   externals: {
-    react: 'react',
-    gsap: 'gsap',
+    react: "react",
+    gsap: "gsap"
   },
 
   resolve: {
-    modules: [
-      './src',
-      './src/app',
-      'node_modules',
-    ],
+    modules: ["./src", "./src/app", "node_modules"]
   },
 
-  devtool: 'source-map',
+  devtool: "source-map",
 
   plugins: [
-    new CopyWebpackPlugin([{ from: 'src/index.d.ts', to: './gsap-tools.d.ts' }]),
+    new CopyWebpackPlugin([{ from: "src/index.d.ts", to: "./gsap-tools.d.ts" }])
   ],
 
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        use: 'babel-loader',
-        exclude: /node_modules/,
+        use: "babel-loader",
+        exclude: /node_modules/
       },
       {
         test: /(\.scss|\.css)$/,
         use: [
-          'classnames-loader',
-          'simple-universal-style-loader',
-          'css-loader?modules=true&importLoaders=true',
-          'postcss-loader',
-          'sass-loader',
+          "classnames-loader",
+          "simple-universal-style-loader",
+          "css-loader?modules=true&importLoaders=true",
+          "postcss-loader",
+          "sass-loader"
         ],
-        exclude: /node_modules.*\.css$/,
-      },
-    ],
-  },
+        exclude: /node_modules.*\.css$/
+      }
+    ]
+  }
 };
